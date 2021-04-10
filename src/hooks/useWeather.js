@@ -6,7 +6,7 @@ const getWeather = ({ lattitude, longitude }) => () =>
     `https://api.openweathermap.org/data/2.5/onecall?lat=${lattitude}&lon=${longitude}&appid=${apiKey}`
   ).then((res) => res.json());
 
-export function useWeather(location = {}) {
+export default function useWeather(location = {}) {
   return useQuery("weather", getWeather(location), {
     enabled: !!location && !!location.lattitude && !!location.longitude,
   });
