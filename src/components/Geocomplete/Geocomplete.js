@@ -5,14 +5,14 @@ const TextInput = styled.input``;
 
 function Geocomplete({ onLocationChanged }) {
   useEffect(() => {
-    const addressField = document.querySelector("#ship-address");
+    const addressField = document.querySelector("#address-field");
 
     const autocomplete = new window.google.maps.places.Autocomplete(
       addressField,
       {
         componentRestrictions: { country: ["us", "ca"] },
-        fields: ["geometry"],
-        types: ["regions"],
+        fields: ["address_components", "geometry"],
+        types: ["(regions)"],
       }
     );
     addressField.focus();

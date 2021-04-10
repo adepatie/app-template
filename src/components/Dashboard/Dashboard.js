@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 import useWeather from "../../hooks/useWeather";
+import Geocomplete from "../Geocomplete";
 
 const DashboardContainer = styled.div`
   width: 100%;
@@ -27,8 +28,6 @@ const ModalWindow = styled.div`
   background: rgba(255, 255, 255);
 `;
 
-const TextInput = styled.input``;
-
 function Dashboard() {
   const [location, setLocation] = useState({});
   const {
@@ -43,7 +42,9 @@ function Dashboard() {
         <ModalBackground>
           <ModalWindow>
             <h3>Enter Location:</h3>
-            <TextInput />
+            <Geocomplete
+              onLocationChanged={(location) => setLocation(location)}
+            />
           </ModalWindow>
         </ModalBackground>
       )}
