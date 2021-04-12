@@ -5,6 +5,8 @@ const TextField = styled.div`
   position: relative;
 `;
 const TextInput = styled.input`
+  font-family: "Lexend", sans-serif;
+  color: hsl(0, 0%, 21%);
   background: 0;
   border: 0;
   outline: none;
@@ -27,7 +29,7 @@ const Line = styled.div`
   height: 3px;
   position: absolute;
   bottom: -8px;
-  background: #bdc3c7;
+  background: hsl(0, 0%, 40%);
   &:after {
     content: " ";
     position: absolute;
@@ -40,10 +42,9 @@ const Line = styled.div`
   }
 `;
 
-function Geocomplete({ onLocationChanged }) {
+function Geocomplete({ onFocus, onLocationChanged }) {
   useEffect(() => {
     const addressField = document.querySelector("#address-field");
-
     const autocomplete = new window.google.maps.places.Autocomplete(
       addressField,
       {
@@ -52,18 +53,23 @@ function Geocomplete({ onLocationChanged }) {
         types: ["(regions)"],
       }
     );
-    addressField.focus();
 
     autocomplete.addListener("place_changed", () => {
       const place = autocomplete.getPlace();
-      console.log("PLACE", place);
-      onLocationChanged(place.geometry.location);
+      onLocationChanged({
+        lat: place.geometry.location.lat(),
+        lng: place.geometry.location.lng(),
+      });
     });
-  }, [onLocationChanged]);
+  }, []);
 
+  function handleInputFocus({ target }) {
+    target.select();
+    onFocus();
+  }
   return (
     <TextField>
-      <TextInput id="address-field" />
+      <TextInput id="address-field" onFocus={handleInputFocus} />
       <Line />
     </TextField>
   );

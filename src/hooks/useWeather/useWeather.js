@@ -1,17 +1,14 @@
 import { useQuery } from "react-query";
-const apiKey = process.env.WEATHER_API_KEY || "";
+const apiKey = process.env.REACT_APP_WEATHER_API_KEY || "";
 
-const getWeather = (lattitude, longitude) =>
-  fetch(
-    `https://api.openweathermap.org/data/2.5/onecall?lat=${lattitude}&lon=${longitude}&appid=${apiKey}`
+function getWeather(location) {
+  return fetch(
+    `https://api.openweathermap.org/data/2.5/onecall?lat=${location.lat}&lon=${location.lng}&appid=${apiKey}&units=imperial`
   ).then((res) => res.json());
+}
 
 export default function useWeather(location) {
-  return useQuery(
-    ["weather", location.lattitude, location.longitude],
-    getWeather,
-    {
-      enabled: !!location.lattitude && !!location.longitude,
-    }
-  );
+  return useQuery(["weather", location], () => getWeather(location), {
+    enabled: !!location.lat && !!location.lng,
+  });
 }

@@ -1,53 +1,73 @@
+import { useSpring } from "@react-spring/core";
+import { animated } from "@react-spring/web";
 import { useState } from "react";
 import styled from "styled-components";
-import useWeather from "../../hooks/useWeather";
-import WeatherProvider from "../../hooks/useWeather/WeatherProvider";
+import WeatherChart from "./WeatherChart";
 import Geocomplete from "../Geocomplete";
 
 const DashboardContainer = styled.div`
   font-family: "Lexend", sans-serif;
+  color: hsl(0, 0%, 21%);
   position: absolute;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
-  padding-left: 20px;
-  padding-right: 20px;
+  width: 100%;
+  height: 100%;
   background: #2980b9; /* fallback for old browsers */
   background: -webkit-linear-gradient(to right, #ffffff, #6dd5fa, #2980b9);
   background: linear-gradient(to right, #ffffff, #6dd5fa, #2980b9);
 `;
 
-const ModalBackground = styled.div`
-  position: absolute;
+const StyledModalBackground = styled.div`
   display: flex;
+  align-items: start;
+  justify-content: center;
+  position: absolute;
   top: 0;
   left: 0;
-  background: rgba(0, 0, 0, 0.5);
   justify-content: center;
   align-items: start;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
 `;
 
-const ModalWindow = styled.div`
-  margin-top: 200px;
-  max-width: 600px;
+const ModalBackground = (props) => {
+  const styleProps = useSpring({
+    background: props.showLocationModal
+      ? "rgba(0, 0, 0, 0.5)"
+      : "rgba(0, 0, 0, 0)",
+  });
+  const AnimatedModalBackground = animated(StyledModalBackground);
+  return <AnimatedModalBackground style={styleProps} {...props} />;
+};
+
+const StyledModalWindow = styled.div`
+  posiiton: relative;
+  flex-grow: 0;
+  max-width: 100%;
   min-height: 70px;
-  padding: 60px 60px;
-  background: rgba(255, 255, 255);
+  padding: 40px;
   border-radius: 15px;
 `;
+
+const ModalWindow = (props) => {
+  const styleProps = useSpring({
+    background: props.showLocationModal
+      ? "rgba(255, 255, 255, 1)"
+      : "rgba(255, 255, 255, 0)",
+    y: props.showLocationModal ? 200 : 0,
+  });
+  const AnimatedModalWindow = animated(StyledModalWindow);
+  return <AnimatedModalWindow style={styleProps} {...props} />;
+};
 
 function Dashboard() {
   const [location, setLocation] = useState({});
   const [showLocationModal, setShowLocationModal] = useState(true);
-  const {
-    isLoading: isWeatherLoading,
-    error: weatherError,
-    data: weatherData,
-    isIdle,
-  } = useWeather(location);
+
+  function handleGeocompleteFocus(toggle = true) {
+    setShowLocationModal(toggle);
+  }
 
   function handleLocationChanged(newLocation) {
     setLocation(newLocation);
@@ -55,18 +75,17 @@ function Dashboard() {
   }
 
   return (
-    <WeatherProvider value={{ location }}>
-      <DashboardContainer>
-        {showLocationModal && (
-          <ModalBackground>
-            <ModalWindow>
-              <Geocomplete onLocationChanged={handleLocationChanged} />
-            </ModalWindow>
-          </ModalBackground>
-        )}
-        <h1></h1>
-      </DashboardContainer>
-    </WeatherProvider>
+    <DashboardContainer>
+      <ModalBackground showLocationModal={showLocationModal}>
+        <ModalWindow showLocationModal={showLocationModal}>
+          <Geocomplete
+            onLocationChanged={handleLocationChanged}
+            onFocus={handleGeocompleteFocus}
+          />
+        </ModalWindow>
+      </ModalBackground>
+      <WeatherChart location={location} />
+    </DashboardContainer>
   );
 }
 
