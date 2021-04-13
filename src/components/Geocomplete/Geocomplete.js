@@ -69,7 +69,11 @@ function Geocomplete({ onFocus, onLocationChanged }) {
   }
   return (
     <TextField>
-      <TextInput id="address-field" onFocus={handleInputFocus} />
+      <TextInput
+        id="address-field"
+        onFocus={handleInputFocus}
+        role="Geocomplete"
+      />
       <Line />
     </TextField>
   );

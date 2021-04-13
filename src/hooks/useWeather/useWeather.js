@@ -9,6 +9,7 @@ function getWeather(location) {
 
 export default function useWeather(location) {
   return useQuery(["weather", location], () => getWeather(location), {
-    enabled: !!location.lat && !!location.lng,
+    enabled: !!location.lat && !!location.lng, // prevents fetching until location is set
+    refetchInterval: 300000, // Refetch data every 5 mins
   });
 }

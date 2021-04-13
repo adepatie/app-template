@@ -2,7 +2,7 @@ import { useSpring } from "@react-spring/core";
 import { animated } from "@react-spring/web";
 import { useState } from "react";
 import styled from "styled-components";
-import WeatherChart from "./WeatherChart";
+import WeatherChart from "../WeatherChart/WeatherChart";
 import Geocomplete from "../Geocomplete";
 
 const DashboardContainer = styled.div`
@@ -75,9 +75,12 @@ function Dashboard() {
   }
 
   return (
-    <DashboardContainer>
-      <ModalBackground showLocationModal={showLocationModal}>
-        <ModalWindow showLocationModal={showLocationModal}>
+    <DashboardContainer role="Dashboard">
+      <ModalBackground
+        showLocationModal={showLocationModal}
+        role="ModalBackground"
+      >
+        <ModalWindow showLocationModal={showLocationModal} role="ModalWindow">
           <Geocomplete
             onLocationChanged={handleLocationChanged}
             onFocus={handleGeocompleteFocus}
