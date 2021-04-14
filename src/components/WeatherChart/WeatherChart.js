@@ -1,45 +1,14 @@
 import styled from "styled-components";
-import useWeather from "../../hooks/useWeather";
 import { DateTime } from "luxon";
-
-function fontSize({ size }) {
-  switch (size) {
-    case "large":
-      return "font-size: 3em;";
-    case "medium":
-      return "font-size: 2em;";
-    case "small":
-      return "font-size: 1.4em;";
-    case "xsmall":
-      return "font-size: 1em;";
-    default:
-      return "font-size: 2em;";
-  }
-}
-
-const Text = styled.span`
-  ${fontSize}
-`;
-
-// The styles here would be nicely abstracted by a design system setup much like the 'fontSize' method above
-const Box = styled.div`
-  display: flex;
-  ${({ alignSelf, direction, alignItems, justifyContent, grow, flex }) => `
-    justify-content: ${justifyContent || "flex-start"};
-    flex-grow: ${grow === undefined ? "1" : grow};
-    ${flex ? `flex: ${flex};` : ""}
-    ${direction ? `flex-direction: ${direction};` : ""}
-    ${alignItems ? `align-items: ${alignItems};` : ""}
-    ${alignSelf ? `align-self: ${alignSelf};` : ""}
-  `}
-`;
+import Box from "../_layout/Box";
+import Text from "../_content/Text";
+import useWeather from "./useWeather";
 
 const Chart = styled(Box)`
   flex-direction: column;
   justify-content: center;
   align-items: start;
   max-width: 900px;
-  margin: 0 auto;
   margin-top: 120px;
   padding: 0 20px;
 `;
@@ -68,7 +37,7 @@ function DayForecast({ dateTime, dayWeather }) {
 }
 
 function WeatherChart({ location }) {
-  const { isLoading, error, data, isIdle } = useWeather(location);
+  const { isLoading, data, isIdle } = useWeather(location);
   const dt = DateTime.now();
 
   if (isIdle || isLoading) {
@@ -82,7 +51,12 @@ function WeatherChart({ location }) {
           {dt.toLocaleString(DateTime.DATE_MED_WITH_WEEKDAY)}
         </Text>
       </Box>
-      <Box direction="row" justifyContent="stretch" alignSelf="stretch">
+      <Box
+        direction="row"
+        justifyContent="stretch"
+        alignSelf="stretch"
+        wrap="wrap"
+      >
         <Box grow="1" direction="column">
           <Text size="small">{dt.toLocaleString(DateTime.TIME_SIMPLE)}</Text>
           <Box direction="row" alignItems="center" justifyContent="flex-start">

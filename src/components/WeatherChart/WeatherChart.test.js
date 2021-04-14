@@ -5,13 +5,12 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { rest } from "msw";
 import { setupServer } from "msw/node";
 import WeatherChart from "./WeatherChart";
-import { mockApiData } from "../Dashboard/test-data";
+import { mockApiData } from "./test-data";
 
 const server = setupServer(
   rest.get(
     "https://api.openweathermap.org/data/2.5/onecall",
     (req, res, ctx) => {
-      console.log("ITS WOOOKRRRIINGG", ctx.json(mockApiData));
       return res(ctx.json(mockApiData));
     }
   )

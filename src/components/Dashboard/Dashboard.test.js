@@ -5,7 +5,7 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { rest } from "msw";
 import { setupServer } from "msw/node";
 import Dashboard from "./Dashboard";
-import { mockApiData } from "./test-data";
+import { mockApiData } from "../WeatherChart/test-data";
 
 const server = setupServer(
   rest.get(
@@ -37,9 +37,7 @@ test("loads and displays location modal", async () => {
   expect(screen.getByRole("Geocomplete")).toHaveValue("");
 });
 
-// this is not how I would actually test this
-// I would use puppeteer to test the google autocomplete without any timers
-// for the sake of time I chose to continue with just the testing-library
+// Using the timer to get around google autocomplete
 jest.setTimeout(10000);
 test("Modal closes after location is set (5sec timer)", async () => {
   render(
