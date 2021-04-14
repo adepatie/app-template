@@ -19,8 +19,8 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 14.x
-      - run: yarn
-      - run: CI=true yarn test
+      - run: npm
+      - run: npm run test
 
   build:
     needs: test
