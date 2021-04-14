@@ -7,9 +7,11 @@ import useWeather from "./useWeather";
 const Chart = styled(Box)`
   flex-direction: column;
   justify-content: center;
-  align-items: start;
+  align-items: center;
   max-width: 900px;
   margin-top: 120px;
+  margin-left: auto;
+  margin-right: auto;
   padding: 0 20px;
 `;
 
