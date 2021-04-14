@@ -42,7 +42,9 @@ jobs:
 
       - name: Build React App
         run: |-
-          REACT_APP_WEATHER_API_KEY=${{ secrets.WEATHER_API_KEY }} REACT_APP_GOOGLE_API_KEY=${{ secrets.GOOGLE_MAPS_KEY }} docker build -t gcr.io/${{ secrets.GCP_PROJECT_ID }}/palmetto-test .
+          docker build -t gcr.io/${{ secrets.GCP_PROJECT_ID }}/palmetto-test . \
+          --build-arg REACT_APP_WEATHER_API_KEY=${{ secrets.WEATHER_API_KEY }} \
+          --build-arg REACT_APP_GOOGLE_API_KEY=${{ secrets.GOOGLE_MAPS_KEY }} 
           docker push gcr.io/${{ secrets.GCP_PROJECT_ID }}/palmetto-test
 
   deploy:
