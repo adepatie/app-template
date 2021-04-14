@@ -68,5 +68,5 @@ jobs:
             --image gcr.io/${{ secrets.GCP_PROJECT_ID }}/palmetto-test \
             --platform managed \
             --region us-central1 \
-            --allow-unauthenticated
+            --allow-unauthenticated \
             --set-env-vars "REACT_APP_WEATHER_API_KEY=${{ secrets.WEATHER_API_KEY }},REACT_APP_GOOGLE_API_KEY=${{ secrets.GOOGLE_MAPS_KEY }}"
