@@ -69,4 +69,4 @@ jobs:
             --platform managed \
             --region us-central1 \
             --allow-unauthenticated \
-            --set-env-vars "REACT_APP_WEATHER_API_KEY=${{ secrets.WEATHER_API_KEY }},REACT_APP_GOOGLE_API_KEY=${{ secrets.GOOGLE_MAPS_KEY }}"
+            --set-env-vars REACT_APP_WEATHER_API_KEY=${{ secrets.WEATHER_API_KEY }}, REACT_APP_GOOGLE_API_KEY=${{ secrets.GOOGLE_MAPS_KEY }}
