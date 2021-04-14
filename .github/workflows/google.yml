@@ -48,7 +48,7 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
-    steps:›4
+    steps:
       - run: echo "Deploying!"
       - name: Checkout
         uses: actions/checkout@v2
