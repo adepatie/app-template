@@ -37,7 +37,7 @@ test("loads and displays location modal", async () => {
   expect(screen.getByRole("Geocomplete")).toHaveValue("");
 });
 
-// Using the timer to get around google autocomplete
+// Using the timer to get around google maps autocomplete
 jest.setTimeout(10000);
 test("Modal closes after location is set (5sec timer)", async () => {
   render(
