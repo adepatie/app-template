@@ -39,10 +39,13 @@ function DayForecast({ dateTime, dayWeather }) {
 }
 
 function WeatherChart({ location }) {
-  const { isLoading, data, isIdle } = useWeather(location);
+  const { isLoading, data, isIdle, error } = useWeather(location);
   const dt = DateTime.now();
 
-  if (isIdle || isLoading) {
+  // TODO: Add better loading and Error handling
+  // i.e. if loading show loading spinner or skeleton
+  // if error, display error message and allow retry
+  if (isIdle || isLoading || error) {
     return <div />;
   }
 
