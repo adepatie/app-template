@@ -42,8 +42,8 @@ const ModalWindow = (props) => {
 };
 
 const Modal = (props) => (
-  <ModalBackground showModal={props.showModal}>
-    <ModalWindow {...props} />
+  <ModalBackground showModal={props.showModal} role="ModalBackground">
+    <ModalWindow role="ModalWindow" {...props} />
   </ModalBackground>
 );
 

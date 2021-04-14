@@ -17,6 +17,9 @@ window.google = {
         addListener(eventName, callback) {
           // this is super hacky but took less time than installing and running puppeteer
           setTimeout(() => callback(), 5000);
+          return {
+            remove: () => {},
+          };
         }
         getPlace() {
           return {
