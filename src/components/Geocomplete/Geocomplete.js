@@ -19,6 +19,7 @@ function Geocomplete({ onFocus, onLocationChanged }) {
         lat: place.geometry.location.lat(),
         lng: place.geometry.location.lng(),
       });
+      addressField.blur();
     });
 
     return () => listener.remove();
