@@ -1,18 +1,18 @@
-name: Publish Weather App
+name: Publish Palmetto Test
 on:
   push:
-    branches: [main]
+    branches: [master]
     paths-ignore:
-      - '**.md'
+      - "**.md"
   pull_request:
-    branches: [main]
+    branches: [master]
     paths-ignore:
-      - '**.md'
+      - "**.md"
 
 jobs:
   test:
     runs-on: ubuntu-latest
-    
+
     steps:
       - uses: actions/checkout@v2
       - name: Run tests
@@ -45,7 +45,6 @@ jobs:
           docker build -t gcr.io/${{ secrets.GCP_PROJECT_ID }}/palmetto-test .
           docker push gcr.io/${{ secrets.GCP_PROJECT_ID }}/palmetto-test
 
-
   deploy:
     needs: build
     runs-on: ubuntu-latest
@@ -64,7 +63,7 @@ jobs:
 
       - name: Deploy React app
         run: |-
-          gcloud run deploy weather-app \
+          gcloud run deploy palmetto-test \
             --project ${{ secrets.GCP_PROJECT_ID }} \
             --image gcr.io/${{ secrets.GCP_PROJECT_ID }}/palmetto-test \
             --platform managed \
