@@ -21,10 +21,6 @@ function Dashboard() {
   const [location, setLocation] = useState({});
   const [showLocationModal, setShowLocationModal] = useState(true);
 
-  function handleGeocompleteFocus(toggle = true) {
-    setShowLocationModal(toggle);
-  }
-
   function handleLocationChanged(newLocation) {
     setLocation(newLocation);
     setShowLocationModal(false);
@@ -32,10 +28,13 @@ function Dashboard() {
 
   return (
     <DashboardContainer role="Dashboard">
-      <Modal showModal={showLocationModal}>
+      <Modal
+        showModal={showLocationModal}
+        handleBackgroundClick={() => setShowLocationModal(false)}
+      >
         <Geocomplete
           onLocationChanged={handleLocationChanged}
-          onFocus={handleGeocompleteFocus}
+          onFocus={() => setShowLocationModal(true)}
         />
       </Modal>
       <WeatherChart location={location} />

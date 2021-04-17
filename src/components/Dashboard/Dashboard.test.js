@@ -32,9 +32,12 @@ test("loads and displays location modal", async () => {
     </DashboardTestWrapper>
   );
 
-  await waitFor(() => screen.getByRole("Geocomplete"));
+  await waitFor(() => screen.getByRole("TextField"));
 
-  expect(screen.getByRole("Geocomplete")).toHaveValue("");
+  expect(screen.getByRole("TextField")).toBeInTheDocument();
+  expect(screen.getByRole("ModalWindow")).toBeInTheDocument();
+  expect(screen.getByRole("ModalBackground")).toBeInTheDocument();
+  expect(screen.getByRole("TextField")).toHaveValue("");
 });
 
 // Using the timer to get around google maps autocomplete
@@ -46,7 +49,7 @@ test("Modal closes after location is set (5sec timer)", async () => {
     </DashboardTestWrapper>
   );
 
-  await waitFor(() => screen.getByRole("Geocomplete"));
+  await waitFor(() => screen.getByRole("ModalBackground"));
   await waitFor(
     () =>
       expect(screen.getByRole("ModalBackground")).toHaveStyle(

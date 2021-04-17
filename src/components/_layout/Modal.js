@@ -2,13 +2,21 @@ import styled from "styled-components";
 import { useSpring } from "@react-spring/core";
 import { animated } from "@react-spring/web";
 
-const StyledModalBackground = styled.div`
+const StyledModalContainer = styled.div`
   position: absolute;
   top: 0;
   left: 0;
   display: flex;
   justify-content: center;
   align-items: start;
+  width: 100%;
+  height: 100%;
+`;
+
+const StyledModalBackground = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
 `;
@@ -42,9 +50,14 @@ const ModalWindow = (props) => {
 };
 
 const Modal = (props) => (
-  <ModalBackground showModal={props.showModal} role="ModalBackground">
+  <StyledModalContainer>
+    <ModalBackground
+      showModal={props.showModal}
+      role="ModalBackground"
+      onClick={props.handleBackgroundClick}
+    />
     <ModalWindow role="ModalWindow" {...props} />
-  </ModalBackground>
+  </StyledModalContainer>
 );
 
 export default Modal;

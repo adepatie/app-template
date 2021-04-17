@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const TextField = (props) => (
   <FieldContainer>
-    <TextInput {...props} />
+    <TextInput {...props} role="TextInput" />
     <Line />
   </FieldContainer>
 );

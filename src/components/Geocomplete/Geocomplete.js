@@ -29,6 +29,7 @@ function Geocomplete({ onFocus, onLocationChanged }) {
     target.select();
     onFocus();
   }
+
   return (
     <TextField
       id="address-field"
