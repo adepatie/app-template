@@ -20,7 +20,7 @@ I took this opportunity to show both my skills as a developer and my eagerness t
 
 - This is about my third time using [styled-components](https://styled-components.com) so it took a bit of learning and adjustment to get started. Once I got started I really enjoyed how it altered my thinking around code/component organization. Everything is a component now. It gave me many ideas around design systems and style abstractions that I had to refrain from doing in order to complete this in a timely manner.
 
-- One of the biggest things I learned in doing this was the use of [@testing-library/react](https://testing-library.com/docs/react-testing-library/intro/) in my unit tests. It provides a philosophy on how to write good React unit tests while providing tools that feel familiar and simplify the process. It was overall much simpler to get tests going than it has been in the past with other solutions.
+- One of the biggest things I learned in doing this was the use of [@testing-library/react](https://testing-library.com/docs/react-testing-library/intro/) in my unit tests. It provides a philosophy on how to write good React unit tests while providing tools that feel familiar and simplify the process. It was overall much simpler to get tests going than it has been in the past with other solutions. [msw](https://mswjs.io/) also made things much easier than previously having to use puppeteer to handle request interception.
 
 - other new-to-me things include [react-query](https://react-query.tanstack.com), [Github Actions](https://github.com/features/actions), and [Luxon](https://moment.github.io/luxon/)
 
