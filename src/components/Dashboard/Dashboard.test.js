@@ -32,12 +32,12 @@ test("loads and displays location modal", async () => {
     </DashboardTestWrapper>
   );
 
-  await waitFor(() => screen.getByRole("TextField"));
+  await waitFor(() => screen.getByRole("TextInput"));
 
-  expect(screen.getByRole("TextField")).toBeInTheDocument();
+  expect(screen.getByRole("TextInput")).toBeInTheDocument();
   expect(screen.getByRole("ModalWindow")).toBeInTheDocument();
   expect(screen.getByRole("ModalBackground")).toBeInTheDocument();
-  expect(screen.getByRole("TextField")).toHaveValue("");
+  expect(screen.getByRole("TextInput")).toHaveValue("");
 });
 
 // Using the timer to get around google maps autocomplete
