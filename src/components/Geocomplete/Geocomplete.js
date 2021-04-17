@@ -9,7 +9,7 @@ function Geocomplete({ onFocus, onLocationChanged }) {
       {
         componentRestrictions: { country: ["us", "ca"] },
         fields: ["address_components", "geometry"],
-        types: ["(regions)"],
+        types: ["(regions)", "address"],
       }
     );
 
@@ -23,7 +23,7 @@ function Geocomplete({ onFocus, onLocationChanged }) {
     });
 
     return () => listener.remove();
-  }, []);
+  }, [onLocationChanged]);
 
   function handleInputFocus({ target }) {
     target.select();
