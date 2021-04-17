@@ -7,9 +7,8 @@ function Geocomplete({ onFocus, onLocationChanged }) {
     const autocomplete = new window.google.maps.places.Autocomplete(
       addressField,
       {
-        componentRestrictions: { country: ["us", "ca"] },
         fields: ["address_components", "geometry"],
-        types: ["(regions)", "address"],
+        types: ["geocode"],
       }
     );
 
