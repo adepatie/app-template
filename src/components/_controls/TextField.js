@@ -1,12 +1,5 @@
 import styled from "styled-components";
 
-const TextField = (props) => (
-  <FieldContainer>
-    <TextInput {...props} role="TextInput" />
-    <Line />
-  </FieldContainer>
-);
-
 export const FieldContainer = styled.div`
   position: relative;
   max-width: 400px;
@@ -49,5 +42,12 @@ export const Line = styled.div`
     background: #1abc9c;
   }
 `;
+
+const TextField = (props) => (
+  <FieldContainer>
+    <TextInput {...props} role="TextInput" />
+    <Line />
+  </FieldContainer>
+);
 
 export default TextField;

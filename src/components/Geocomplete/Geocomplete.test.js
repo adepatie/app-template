@@ -4,7 +4,6 @@ import Geocomplete from "./Geocomplete";
 
 test("Geocomplete loads and shows text input", async () => {
   render(<Geocomplete onLocationChanged={() => {}} />);
-
   await waitFor(() =>
     expect(screen.getByRole("TextInput")).toBeInTheDocument()
   );
