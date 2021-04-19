@@ -37,7 +37,7 @@ const StyledModalWindow = styled.div`
   max-width: 400px;
   padding: 40px;
   border-radius: 15px;
-  background: #116655;
+  background: #222529;
 `;
 
 const ModalWindow = (props) => {

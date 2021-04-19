@@ -11,7 +11,7 @@ const DashboardContainer = styled.div`
   top: 0;
   left: 0;
   width: 100%;
-  background: #116655;
+  background: #222529;
 `;
 
 function Dashboard() {
