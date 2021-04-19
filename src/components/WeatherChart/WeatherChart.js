@@ -41,6 +41,7 @@ const WeatherImage = styled.img`
   ${imageSize}
   background: #fffefa;
   border-radius: 50%;
+  margin: 10px 0;
 `;
 
 function DayForecast({ dateTime, dayWeather }) {
@@ -53,12 +54,15 @@ function DayForecast({ dateTime, dayWeather }) {
     >
       <Text size="xsmall">{dateTime.toFormat("ccc")}</Text>
       <Text size="xsmall">{dateTime.toFormat("LLL d")}</Text>
-      <Text size="small">{Math.floor(dayWeather.temp.day)}</Text>
       <WeatherImage
         src={`http://openweathermap.org/img/wn/${dayWeather.weather[0].icon}.png`}
         alt={dayWeather.weather[0].description}
         size="small"
       />
+      <div>
+        <Text size="small">{Math.floor(dayWeather.temp.day)}</Text>
+        <Text size="xsmall"> {Math.floor(dayWeather.temp.night)}</Text>
+      </div>
     </SunTile>
   );
 }
