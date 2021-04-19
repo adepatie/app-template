@@ -5,7 +5,7 @@ import styled from "styled-components";
 const mountainGrey = "#48454E";
 const coronaWhite = "#fffefa";
 const nightBlue = "#223F59";
-const covidBlue = "##5B799B";
+const covidBlue = "#5B799B";
 const clearYellow = "#FEEFAF";
 const sunsetAmber = "#F2BE7E";
 

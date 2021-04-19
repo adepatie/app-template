@@ -45,21 +45,21 @@ const WeatherImage = styled.img`
 
 function DayForecast({ dateTime, dayWeather }) {
   return (
-    <Box direction="row" alignItems="center">
-      <Box direction="row" flex="0 0 150px">
-        <Text size="xsmall">
-          {dateTime.plus({ days: 1 }).toFormat("ccc, LLL d")}
-        </Text>
-      </Box>
-      <Box direction="row" alignItems="center">
-        <Text size="small">{Math.floor(dayWeather.temp.day)}</Text>
-        <Text size="xsmall"> F</Text>
-        <img
-          src={`http://openweathermap.org/img/wn/${dayWeather.weather[0].icon}.png`}
-          alt={dayWeather.weather[0].description}
-        />
-      </Box>
-    </Box>
+    <SunTile
+      weather={dayWeather}
+      dateTime={dateTime}
+      grow="0"
+      margin="0 15px 0 0 "
+    >
+      <Text size="xsmall">{dateTime.toFormat("ccc")}</Text>
+      <Text size="xsmall">{dateTime.toFormat("LLL d")}</Text>
+      <Text size="small">{Math.floor(dayWeather.temp.day)}</Text>
+      <WeatherImage
+        src={`http://openweathermap.org/img/wn/${dayWeather.weather[0].icon}.png`}
+        alt={dayWeather.weather[0].description}
+        size="small"
+      />
+    </SunTile>
   );
 }
 
@@ -116,13 +116,31 @@ function WeatherChart({ location }) {
           />
         </SunTile>
       </Columns>
-
-      {/* Would typically have the data structured in a way that allows data.map(() => component) to be used */}
-      <DayForecast dateTime={dt.plus({ days: 1 })} dayWeather={data.daily[1]} />
-      <DayForecast dateTime={dt.plus({ days: 2 })} dayWeather={data.daily[2]} />
-      <DayForecast dateTime={dt.plus({ days: 3 })} dayWeather={data.daily[3]} />
-      <DayForecast dateTime={dt.plus({ days: 4 })} dayWeather={data.daily[4]} />
-      <DayForecast dateTime={dt.plus({ days: 5 })} dayWeather={data.daily[5]} />
+      <Text size="medium" margin="30px 0">
+        5-Day Forecast
+      </Text>
+      <Columns>
+        <DayForecast
+          dateTime={dt.plus({ days: 1 })}
+          dayWeather={data.daily[1]}
+        />
+        <DayForecast
+          dateTime={dt.plus({ days: 2 })}
+          dayWeather={data.daily[2]}
+        />
+        <DayForecast
+          dateTime={dt.plus({ days: 3 })}
+          dayWeather={data.daily[3]}
+        />
+        <DayForecast
+          dateTime={dt.plus({ days: 4 })}
+          dayWeather={data.daily[4]}
+        />
+        <DayForecast
+          dateTime={dt.plus({ days: 5 })}
+          dayWeather={data.daily[5]}
+        />
+      </Columns>
     </Chart>
   );
 }

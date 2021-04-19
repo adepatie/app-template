@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import mapCssProp from "../_utils/mapCssProp";
 
 function fontSize({ size }) {
   switch (size) {
@@ -19,6 +20,7 @@ function fontSize({ size }) {
 
 const Text = styled.span`
   ${fontSize}
+  ${mapCssProp("margin")}
 `;
 
 export default Text;
