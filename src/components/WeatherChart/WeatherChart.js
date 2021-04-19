@@ -1,13 +1,14 @@
 import styled from "styled-components";
 import { DateTime } from "luxon";
 import Box from "../_layout/Box";
+import Column from "../_layout/Column";
+import Columns from "../_layout/Columns";
 import Text from "../_content/Text";
 import useWeather from "./useWeather";
+import SunTile from "./SunTile";
 
 const Chart = styled(Box)`
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
   max-width: 900px;
   margin-top: 120px;
   margin-left: auto;
@@ -15,7 +16,32 @@ const Chart = styled(Box)`
   padding: 0 20px;
 `;
 
-const DegreesSymbol = (props) => <Text {...props}>&#176;</Text>;
+function imageSize({ size }) {
+  switch (size) {
+    case "small":
+      return `
+        height: 50px;
+        width: 50px;
+      `;
+    case "medium":
+      return `
+        height: 75px;
+        width: 75px;
+      `;
+    case "large":
+    default:
+      return `
+        height: 100px;
+        width: 100px;
+      `;
+  }
+}
+
+const WeatherImage = styled.img`
+  ${imageSize}
+  background: #fffefa;
+  border-radius: 50%;
+`;
 
 function DayForecast({ dateTime, dayWeather }) {
   return (
@@ -27,7 +53,6 @@ function DayForecast({ dateTime, dayWeather }) {
       </Box>
       <Box direction="row" alignItems="center">
         <Text size="small">{Math.floor(dayWeather.temp.day)}</Text>
-        <DegreesSymbol size="small" />
         <Text size="xsmall"> F</Text>
         <img
           src={`http://openweathermap.org/img/wn/${dayWeather.weather[0].icon}.png`}
@@ -51,47 +76,46 @@ function WeatherChart({ location }) {
 
   return (
     <Chart role="WeatherChart">
-      <Box alignItems="flex-start" alignSelf="start">
-        <Text size="xsmall">
-          {dt.toLocaleString(DateTime.DATE_MED_WITH_WEEKDAY)}
-        </Text>
-      </Box>
-      <Box
-        direction="row"
-        justifyContent="stretch"
-        alignSelf="stretch"
-        wrap="wrap"
-      >
-        <Box grow="1" direction="column">
+      <Text size="medium">Today's Weather</Text>
+      <Text size="xsmall">{dt.toLocaleString(DateTime.DATE_SHORT)}</Text>
+      <Columns justifyContent="flex-start" padding="15px 0 " alignItems="start">
+        <SunTile
+          weather={data.current}
+          dateTime={dt}
+          grow="0"
+          sunrise={data.current.sunrise}
+          sunset={data.current.sunset}
+        >
           <Text size="small">{dt.toLocaleString(DateTime.TIME_SIMPLE)}</Text>
-          <Box direction="row" alignItems="center" justifyContent="flex-start">
-            <Text size="large" role="CurrentTemp">
-              {Math.floor(data.current.temp)}
-            </Text>
-            <DegreesSymbol size="large" />
-            <Text size="small"> F</Text>
-            <img
-              src={`http://openweathermap.org/img/wn/${data.current.weather[0].icon}@2x.png`}
-              alt={data.current.weather[0].description}
-            />
-          </Box>
-        </Box>
-
-        <Box grow="1" direction="column">
+          <Text size="xlarge" role="CurrentTemp">
+            {Math.floor(data.current.temp)}
+          </Text>
+          <WeatherImage
+            src={`http://openweathermap.org/img/wn/${data.current.weather[0].icon}@2x.png`}
+            alt={data.current.weather[0].description}
+          />
+        </SunTile>
+        <Column margin="0 40px" padding="15px 0 0 0">
+          <Text size="small">+ 4 hrs</Text>
+        </Column>
+        <SunTile
+          weather={data.hourly[4]}
+          dateTime={dt.plus({ hours: 4 })}
+          grow="0"
+          sunrise={data.current.sunrise}
+          sunset={data.current.sunset}
+        >
           <Text size="small">
             {dt.plus({ hours: 4 }).toLocaleString(DateTime.TIME_SIMPLE)}
           </Text>
-          <Box direction="row" alignItems="center">
-            <Text size="large">{Math.floor(data.hourly[4].temp)}</Text>
-            <DegreesSymbol size="large" />
-            <Text size="small"> F</Text>
-            <img
-              src={`http://openweathermap.org/img/wn/${data.hourly[5].weather[0].icon}@2x.png`}
-              alt={data.hourly[5].weather[0].description}
-            />
-          </Box>
-        </Box>
-      </Box>
+          <Text size="large">{Math.floor(data.hourly[4].temp)}</Text>
+          <WeatherImage
+            src={`http://openweathermap.org/img/wn/${data.hourly[5].weather[0].icon}@2x.png`}
+            alt={data.hourly[5].weather[0].description}
+            size="medium"
+          />
+        </SunTile>
+      </Columns>
 
       {/* Would typically have the data structured in a way that allows data.map(() => component) to be used */}
       <DayForecast dateTime={dt.plus({ days: 1 })} dayWeather={data.daily[1]} />

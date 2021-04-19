@@ -2,6 +2,8 @@ import styled from "styled-components";
 
 function fontSize({ size }) {
   switch (size) {
+    case "xlarge":
+      return "font-size: 3.6em;";
     case "large":
       return "font-size: 3em;";
     case "medium":

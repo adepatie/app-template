@@ -60,9 +60,6 @@ test("Modal closes after location is set (5sec timer)", async () => {
     }
   );
 
-  expect(screen.getByRole("ModalBackground")).toHaveStyle(
-    "background: rgba(0, 0, 0, 0)"
-  );
   expect(screen.getByRole("ModalWindow")).toHaveStyle(
     "background: rgba(255, 255, 255, 0)"
   );

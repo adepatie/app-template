@@ -24,6 +24,7 @@ const StyledModalBackground = styled.div`
 const ModalBackground = (props) => {
   const styleProps = useSpring({
     background: props.showModal ? "rgba(0, 0, 0, 0.5)" : "rgba(0, 0, 0, 0)",
+    display: props.showModal ? "block" : "none",
   });
   const AnimatedModalBackground = animated(StyledModalBackground);
   return <AnimatedModalBackground style={styleProps} {...props} />;
