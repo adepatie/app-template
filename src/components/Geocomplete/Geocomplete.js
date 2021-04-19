@@ -22,8 +22,9 @@ function Geocomplete({ onFocus, onLocationChanged }) {
     });
 
     return () => {
-      listener.remove();
-      document.querySelector(".pac-container").remove();
+      const pacContainer = document.querySelector(".pac-container");
+      !!listener && listener.remove();
+      !!pacContainer && pacContainer.remove();
     };
   }, [onLocationChanged]);
 
