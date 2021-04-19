@@ -21,7 +21,10 @@ function Geocomplete({ onFocus, onLocationChanged }) {
       addressField.blur();
     });
 
-    return () => listener.remove();
+    return () => {
+      listener.remove();
+      document.querySelector(".pac-container").remove();
+    };
   }, [onLocationChanged]);
 
   function handleInputFocus({ target }) {
