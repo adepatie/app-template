@@ -43,24 +43,16 @@ test("loads and displays location modal", async () => {
 // Using the timer to get around google maps autocomplete
 jest.setTimeout(10000);
 test("Modal closes after location is set (5sec timer)", async () => {
-  render(
+  const { queryByRole } = render(
     <DashboardTestWrapper>
       <Dashboard />
     </DashboardTestWrapper>
   );
 
   await waitFor(() => screen.getByRole("ModalBackground"));
-  await waitFor(
-    () =>
-      expect(screen.getByRole("ModalBackground")).toHaveStyle(
-        "background: rgba(0, 0, 0, 0)"
-      ),
-    {
-      timeout: 6000,
-    }
-  );
+  await waitFor(() => expect(queryByRole("ModalBackground")).toBeNull(), {
+    timeout: 6000,
+  });
 
-  expect(screen.getByRole("ModalWindow")).toHaveStyle(
-    "background: rgba(255, 255, 255, 0)"
-  );
+  expect(screen.getByRole("ModalWindow")).toBeInTheDocument();
 });

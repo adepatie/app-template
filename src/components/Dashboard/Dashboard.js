@@ -6,15 +6,12 @@ import Geocomplete from "../Geocomplete";
 
 const DashboardContainer = styled.div`
   font-family: "Lexend", sans-serif;
-  color: hsl(0, 0%, 21%);
+  color: #fffefa;
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
-  background: #2980b9; /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #ffffff, #6dd5fa, #2980b9);
-  background: linear-gradient(to right, #ffffff, #6dd5fa, #2980b9);
+  background: #116655;
 `;
 
 function Dashboard() {

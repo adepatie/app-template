@@ -7,7 +7,7 @@ export const FieldContainer = styled.div`
 
 export const TextInput = styled.input`
   font-family: "Lexend", sans-serif;
-  color: hsl(0, 0%, 21%);
+  color: #fffefa;
   background: 0;
   border: 0;
   outline: none;
@@ -30,7 +30,7 @@ export const Line = styled.div`
   height: 3px;
   position: absolute;
   bottom: -8px;
-  background: hsl(0, 0%, 40%);
+  background: #fffefa;
   &:after {
     content: " ";
     position: absolute;

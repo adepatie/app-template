@@ -9,7 +9,7 @@ import SunTile from "./SunTile";
 
 const Chart = styled(Box)`
   flex-direction: column;
-  max-width: 900px;
+  max-width: 700px;
   margin-top: 120px;
   margin-left: auto;
   margin-right: auto;
@@ -50,7 +50,7 @@ function DayForecast({ dateTime, dayWeather }) {
       weather={dayWeather}
       dateTime={dateTime}
       grow="0"
-      margin="0 15px 0 0 "
+      margin="0 0 15px 0 "
     >
       <Text size="xsmall">{dateTime.toFormat("ccc")}</Text>
       <Text size="xsmall">{dateTime.toFormat("LLL d")}</Text>
@@ -123,7 +123,7 @@ function WeatherChart({ location }) {
       <Text size="medium" margin="30px 0">
         5-Day Forecast
       </Text>
-      <Columns>
+      <Columns wrap="wrap" justifyContent="space-between">
         <DayForecast
           dateTime={dt.plus({ days: 1 })}
           dayWeather={data.daily[1]}
