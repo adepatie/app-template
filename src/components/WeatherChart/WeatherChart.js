@@ -39,7 +39,7 @@ function imageSize({ size }) {
 
 const WeatherImage = styled.img`
   ${imageSize}
-  background: #fffefa;
+  background: rgba(34, 37, 41, 0.3);
   border-radius: 50%;
   margin: 10px 0;
 `;
@@ -49,8 +49,8 @@ function DayForecast({ dateTime, dayWeather }) {
     <SunTile
       weather={dayWeather}
       dateTime={dateTime}
-      grow="0"
-      margin="0 0 15px 0 "
+      grow="1"
+      margin="0 10px 10px 0"
     >
       <Text size="xsmall">{dateTime.toFormat("ccc")}</Text>
       <Text size="xsmall">{dateTime.toFormat("LLL d")}</Text>
@@ -89,6 +89,7 @@ function WeatherChart({ location }) {
           grow="0"
           sunrise={data.current.sunrise}
           sunset={data.current.sunset}
+          size="large"
         >
           <Text size="small">{dt.toLocaleString(DateTime.TIME_SIMPLE)}</Text>
           <Text size="xlarge" role="CurrentTemp">
@@ -99,7 +100,7 @@ function WeatherChart({ location }) {
             alt={data.current.weather[0].description}
           />
         </SunTile>
-        <Column margin="0 40px" padding="15px 0 0 0">
+        <Column margin="0 40px" padding="15px 0 0 0" alignItems="right">
           <Text size="small">+ 4 hrs</Text>
         </Column>
         <SunTile
@@ -108,6 +109,7 @@ function WeatherChart({ location }) {
           grow="0"
           sunrise={data.current.sunrise}
           sunset={data.current.sunset}
+          size="medium"
         >
           <Text size="small">
             {dt.plus({ hours: 4 }).toLocaleString(DateTime.TIME_SIMPLE)}
@@ -124,26 +126,12 @@ function WeatherChart({ location }) {
         5-Day Forecast
       </Text>
       <Columns wrap="wrap" justifyContent="space-between">
-        <DayForecast
-          dateTime={dt.plus({ days: 1 })}
-          dayWeather={data.daily[1]}
-        />
-        <DayForecast
-          dateTime={dt.plus({ days: 2 })}
-          dayWeather={data.daily[2]}
-        />
-        <DayForecast
-          dateTime={dt.plus({ days: 3 })}
-          dayWeather={data.daily[3]}
-        />
-        <DayForecast
-          dateTime={dt.plus({ days: 4 })}
-          dayWeather={data.daily[4]}
-        />
-        <DayForecast
-          dateTime={dt.plus({ days: 5 })}
-          dayWeather={data.daily[5]}
-        />
+        {[...Array(5)].map((value, index) => (
+          <DayForecast
+            dateTime={dt.plus({ days: index + 1 })}
+            dayWeather={data.daily[index + 1]}
+          />
+        ))}
       </Columns>
     </Chart>
   );
