@@ -1,19 +1,20 @@
 import Box from "../_layout/Box";
 import { DateTime } from "luxon";
 import styled from "styled-components";
-
-const mountainGrey = "#48454E";
-const coronaWhite = "#fffefa";
-const nightBlue = "#223F59";
-const covidBlue = "#5B799B";
-const clearYellow = "#FEEFAF";
-const sunsetAmber = "#F2BE7E";
+import {
+  mountainGrey,
+  coronaWhite,
+  nightBlue,
+  cloudBlue,
+  clearYellow,
+  sunsetAmber,
+} from "../../theme";
 
 function sunStyles({ dateTime, weather, sunrise, sunset }) {
   if (!!sunrise && !!sunset) {
     if (
-      dateTime <= DateTime.fromSeconds(sunrise) ||
-      dateTime >= DateTime.fromSeconds(sunset)
+      dateTime <= DateTime.fromSeconds(sunrise).minus({ hours: 1 }) ||
+      dateTime >= DateTime.fromSeconds(sunset).plus({ hours: 1 })
     ) {
       return `
         background: ${nightBlue};
@@ -24,7 +25,7 @@ function sunStyles({ dateTime, weather, sunrise, sunset }) {
 
   if (weather.clouds > 75) {
     return `
-      background: ${covidBlue};
+      background: ${cloudBlue};
       color: ${coronaWhite};
     `;
   }
@@ -46,8 +47,23 @@ function sunStyles({ dateTime, weather, sunrise, sunset }) {
     `;
 }
 
+function size(props) {
+  switch (props.size) {
+    case "medium":
+      return "min-width: 110px;";
+    case "large":
+      return "min-width: 150px;";
+    default:
+      return `
+      max-width: 90px;
+      min-width: 70px;
+      `;
+  }
+}
+
 const StyledSunTile = styled(Box)`
   ${sunStyles}
+  ${size}
   align-items: flex-start;
   padding: 15px;
   flex-direction: column;
