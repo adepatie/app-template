@@ -41,6 +41,7 @@ function sunStyles({ dateTime, weather, sunrise, sunset }) {
     `;
     }
   }
+
   return `
       background: ${clearYellow};
       color: ${mountainGrey};
@@ -55,8 +56,8 @@ function size(props) {
       return "min-width: 150px;";
     default:
       return `
-      max-width: 90px;
-      min-width: 70px;
+        max-width: 90px;
+        min-width: 70px;
       `;
   }
 }

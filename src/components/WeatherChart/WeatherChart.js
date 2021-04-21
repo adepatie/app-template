@@ -100,8 +100,8 @@ function WeatherChart({ location }) {
             alt={data.current.weather[0].description}
           />
         </SunTile>
-        <Column margin="0 40px" padding="15px 0 0 0" alignItems="right">
-          <Text size="small">+ 4 hrs</Text>
+        <Column margin="0 20px" padding="15px 0 0 0" alignItems="right">
+          <Text size="xsmall">+ 4 hrs</Text>
         </Column>
         <SunTile
           weather={data.hourly[4]}
