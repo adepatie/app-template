@@ -68,14 +68,18 @@ function DayForecast({ dateTime, dayWeather }) {
 }
 
 function WeatherChart({ location }) {
-  const { isLoading, data, isIdle, error } = useWeather(location);
+  const { isLoading, isError, isIdle, data, error } = useWeather(location);
   const dt = DateTime.now();
 
-  // TODO: Add better loading and Error handling
-  // i.e. if loading show loading spinner or skeleton
-  // if error, display error message and allow retry
-  if (isIdle || isLoading || error) {
+  if (isIdle) {
     return <div />;
+  }
+  if (isLoading) {
+    return <span>Loading...</span>;
+  }
+
+  if (isError) {
+    return <span>Error: {error.message}</span>;
   }
 
   return (
