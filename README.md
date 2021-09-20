@@ -17,7 +17,3 @@ Create a `.env.local` file based on `.env.local-template` and add the correspond
 `npm install`
 
 `npm run start`
-
-## Thank you
-
-For reading through my code and giving me another reason to try new things. I had a lot of fun making this.
